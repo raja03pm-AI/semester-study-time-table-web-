@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A simple study timetable and progress tracker for November–December 2026 university exams."
+    />
+    <title>Exam Focus — Study Timetable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow"><span></span> Nov–Dec 2026 exam plan</p>
+          <h1>Study steadily.<br /><em>Arrive prepared.</em></h1>
+          <p class="hero-copy">
+            A realistic daily rhythm, built around your gym, meals and revision hour.
+          </p>
+        </div>
+        <aside class="deadline-note" aria-label="Syllabus target note">
+          <div class="note-icon">!</div>
+          <div>
+            <strong>15 Nov: syllabus target</strong>
+            <p id="deadline-message">40 units in 15 days is ambitious — aim for consistency, then protect the exam revisions.</p>
+          </div>
+        </aside>
+      </header>
+
+      <section class="overview-grid" aria-label="Progress overview">
+        <article class="progress-card wide-card">
+          <div class="card-title-row">
+            <div>
+              <p class="label">Syllabus completion</p>
+              <h2><span id="completed-units">0</span><span class="muted"> / 40 units</span></h2>
+            </div>
+            <span class="status-pill" id="syllabus-status">Getting started</span>
+          </div>
+          <div class="meter" aria-label="Syllabus completion progress"><div class="meter-fill" id="syllabus-meter"></div></div>
+          <p class="small-copy" id="progress-message">Start with today’s first planned unit. Every checked unit is saved in this browser.</p>
+        </article>
+        <article class="mini-stat">
+          <p class="label">Next exam</p>
+          <h2 id="next-exam-date">21 Nov</h2>
+          <p id="next-exam-name">Data &amp; Information Security</p>
+        </article>
+        <article class="mini-stat accent-stat">
+          <p class="label">Revision streak</p>
+          <h2><span id="revision-count">0</span><span class="muted"> / 4</span></h2>
+          <p>items checked for selected day</p>
+        </article>
+      </section>
+
+      <nav class="tab-bar" aria-label="Study planner sections">
+        <button class="tab is-active" data-tab="plan">Today’s plan</button>
+        <button class="tab" data-tab="units">Unit tracker</button>
+        <button class="tab" data-tab="exams">Exams &amp; strategy</button>
+      </nav>
+
+      <section id="plan" class="tab-panel is-active" aria-labelledby="today-plan">
+        <div class="section-heading plan-heading">
+          <div>
+            <p class="label">Day-wise session schedule</p>
+            <h2 id="selected-date-heading">Sunday, 1 November</h2>
+          </div>
+          <div class="date-tools">
+            <button class="round-button" id="previous-day" aria-label="Previous day">←</button>
+            <button class="jump-button" id="jump-to-start">1 Nov</button>
+            <button class="round-button" id="next-day" aria-label="Next day">→</button>
+          </div>
+        </div>
+
+        <div class="date-strip-wrap">
+          <div class="date-strip" id="date-strip" aria-label="Choose a study date"></div>
+        </div>
+
+        <div class="daily-layout">
+          <article class="schedule-card">
+            <div class="card-title-row">
+              <div>
+                <p class="label">Fixed timetable</p>
+                <h2>Daily focus blocks</h2>
+              </div>
+              <span class="quiet-chip">Gym protected</span>
+            </div>
+            <div id="session-list" class="session-list"></div>
+          </article>
+
+          <aside class="revision-card">
+            <div class="card-title-row">
+              <div>
+                <p class="label">11:00 PM–12:00 AM</p>
+                <h2>Daily revision only</h2>
+              </div>
+              <span class="revision-dot"></span>
+            </div>
+            <p class="small-copy">No new topic here. Recall, correct and condense what you covered today.</p>
+            <div id="revision-checklist" class="checklist"></div>
+            <p class="saved-note">✓ Revision checks are saved in this browser.</p>
+          </aside>
+        </div>
+
+        <div class="routine-card">
+          <div>
+            <p class="label">Built-in recovery</p>
+            <strong>Breakfast 8:30–9:15 · Lunch 12:30–1:30 · Gym 4:30–6:30 · Freshen up 6:30–7:00 · Dinner 7:20–8:00</strong>
+          </div>
+          <p>Use the gaps to reset — they are part of the plan, not missed study time.</p>
+        </div>
+      </section>
+
+      <section id="units" class="tab-panel" aria-labelledby="unit-tracker">
+        <div class="section-heading">
+          <div>
+            <p class="label">40-unit completion tracker</p>
+            <h2>Finish the syllabus, one unit at a time</h2>
+          </div>
+          <button id="reset-progress" class="text-button">Reset saved progress</button>
+        </div>
+        <p class="tracker-intro">Mark a unit only after a first pass plus short notes. The plan aims to cover all units by 15 Nov; if a unit slips, move it into the next evening practice block rather than sacrificing sleep.</p>
+        <div id="subject-trackers" class="subject-trackers"></div>
+      </section>
+
+      <section id="exams" class="tab-panel" aria-labelledby="exams-strategy">
+        <div class="section-heading">
+          <div>
+            <p class="label">Priorities &amp; exam dates</p>
+            <h2>What to protect after 15 Nov</h2>
+          </div>
+        </div>
+        <div class="exam-layout">
+          <div id="exam-list" class="exam-list"></div>
+          <aside class="strategy-card">
+            <p class="label">Final revision pattern</p>
+            <h2>Three passes, no panic</h2>
+            <ol>
+              <li><strong>Pass 1 — repair:</strong> revisit missed concepts and finish notes.</li>
+              <li><strong>Pass 2 — retrieve:</strong> solve past questions or self-test without notes.</li>
+              <li><strong>Pass 3 — compress:</strong> formulas, definitions, diagrams and weak spots.</li>
+            </ol>
+            <div class="strategy-tip"><strong>Exam eve:</strong> stop adding content early, prepare essentials, then sleep.</div>
+          </aside>
+        </div>
+        <article class="honesty-card">
+          <span>Reality check</span>
+          <p>Starting from zero and completing 40 units by 15 Nov means roughly <strong>2–3 units every day</strong>. It is a stretch goal, not a reason to rush shallowly. Keep the high-priority courses moving first; use the final-revision blocks to repair any unfinished medium-priority unit.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>Exam Focus · personal study planner · no background reminders or cloud sync in this version</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
